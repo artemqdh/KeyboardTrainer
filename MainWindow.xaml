@@ -1,0 +1,117 @@
+﻿<Window x:Class="KeyboardTrainer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KeyboardTrainer"
+        mc:Ignorable="d"
+        Title="Keyboard Trainer" Height="400" Width="800"
+        KeyDown="KeyPressed">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Name="Speed" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="Speed: 0 chars/min" FontSize="16" Focusable="False"/>
+        <TextBlock Name="Fails" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2" Text="Fails: 0" FontSize="16" TextAlignment="Center" Focusable="False"/>
+        <Button Name="Start" Grid.Column="13" Grid.Row="0" Content="Start" FontSize="16" Click="Start_Click" Focusable="False"/>
+        <Button Name="Stop" Grid.Column="14" Grid.Row="0" Content="Stop" FontSize="16" Click="Stop_Click" Focusable="False"/>
+
+        <TextBlock Name="PrintSentence" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="15" FontSize="10" 
+                   Background="LightSkyBlue" Margin="5" Padding="10" TextWrapping="Wrap" Focusable="False"/>
+
+        <TextBox Name="InputBox" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="15" FontSize="10" 
+                 Margin="5,35,5,10" Padding="10" Background="LightYellow" IsReadOnly="True" VerticalContentAlignment="Top"
+                 Text="{Binding _typedText, UpdateSourceTrigger=PropertyChanged}" Focusable="True" Grid.RowSpan="2" />
+
+        <Button Name="QuoteButton" Grid.Column="0" Grid.Row="3" Content="`" Background="IndianRed" FontSize="32" Focusable="False"/>
+        <Button Name="OneButton" Grid.Column="1" Grid.Row="3" Content="1" Background="IndianRed" FontSize="32" Focusable="False"/>
+        <Button Name="TwoButton" Grid.Column="2" Grid.Row="3" Content="2" Background="IndianRed" FontSize="32" Focusable="False"/>
+        <Button Name="ThreeButton" Grid.Column="3" Grid.Row="3" Content="3" Background="LightYellow" FontSize="32" Focusable="False"/>
+        <Button Name="FourButton" Grid.Column="4" Grid.Row="3" Content="4" Background="LightGreen" FontSize="32" Focusable="False"/>
+        <Button Name="FiveButton" Grid.Column="5" Grid.Row="3" Content="5" Background="CornflowerBlue" FontSize="32" Focusable="False"/>
+        <Button Name="SixButton" Grid.Column="6" Grid.Row="3" Content="6" Background="CornflowerBlue" FontSize="32" Focusable="False"/>
+        <Button Name="SevenButton" Grid.Column="7" Grid.Row="3" Content="7" Background="LightPink" FontSize="32" Focusable="False"/>
+        <Button Name="EightButton" Grid.Column="8" Grid.Row="3" Content="8" Background="LightPink" FontSize="32" Focusable="False"/>
+        <Button Name="NineButton" Grid.Column="9" Grid.Row="3" Content="9" Background="IndianRed" FontSize="32" Focusable="False"/>
+        <Button Name="ZeroButton" Grid.Column="10" Grid.Row="3" Content="0" Background="LightYellow" FontSize="32" Focusable="False"/>
+        <Button Name="MinusButton" Grid.Column="11" Grid.Row="3" Content="-" Background="LightGreen" FontSize="32" Focusable="False"/>
+        <Button Name="EqualsButton" Grid.Column="12" Grid.Row="3" Content="=" Background="LightGreen" FontSize="32" Focusable="False"/>
+        <Button Name="BackspaceButton" Grid.Column="13" Grid.Row="3" Grid.ColumnSpan="2" Content="Backspace" Background="LightGray"
+                FontSize="20" Click="BackspaceButton_Click" Focusable="False"/>
+
+        <Button Name="TabButton" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Content="Tab" Background="LightGray" FontSize="20" Focusable="False"/>
+        <Button Name="QButton" Grid.Column="2" Grid.Row="4" Content="Q" Background="IndianRed" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="WButton" Grid.Column="3" Grid.Row="4" Content="W" Background="LightYellow" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="EButton" Grid.Column="4" Grid.Row="4" Content="E" Background="LightGreen" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="RButton" Grid.Column="5" Grid.Row="4" Content="R" Background="CornflowerBlue" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="TButton" Grid.Column="6" Grid.Row="4" Content="T" Background="CornflowerBlue" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="YButton" Grid.Column="7" Grid.Row="4" Content="Y" Background="LightPink" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="UButton" Grid.Column="8" Grid.Row="4" Content="U" Background="LightPink" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="IButton" Grid.Column="9" Grid.Row="4" Content="I" Background="IndianRed" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="OButton" Grid.Column="10" Grid.Row="4" Content="O" Background="LightYellow" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="PButton" Grid.Column="11" Grid.Row="4" Content="P" Background="LightGreen" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="OpenBracketButton" Grid.Column="12" Grid.Row="4" Content="[" Background="LightGreen" FontSize="32" Focusable="False"/>
+        <Button Name="CloseBracketButton" Grid.Column="13" Grid.Row="4" Content="]" Background="LightGreen" FontSize="32" Focusable="False"/>
+        <Button Name="BackslashButton" Grid.Column="14" Grid.Row="4" Content="\" Background="LightGreen" FontSize="32" Focusable="False"/>
+
+        <Button Name="CapsLockButton" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Content="Caps Lock"
+                Background="LightGray" FontSize="20" Click="CapsLockButton_Click" Focusable="False"/>
+        <Button Name="AButton" Grid.Column="2" Grid.Row="5" Content="A" Background="IndianRed" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="SButton" Grid.Column="3" Grid.Row="5" Content="S" Background="LightYellow" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="DButton" Grid.Column="4" Grid.Row="5" Content="D" Background="LightGreen" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="FButton" Grid.Column="5" Grid.Row="5" Content="F" Background="CornflowerBlue" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="GButton" Grid.Column="6" Grid.Row="5" Content="G" Background="CornflowerBlue" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="HButton" Grid.Column="7" Grid.Row="5" Content="H" Background="LightPink" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="JButton" Grid.Column="8" Grid.Row="5" Content="J" Background="LightPink" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="KButton" Grid.Column="9" Grid.Row="5" Content="K" Background="IndianRed" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="LButton" Grid.Column="10" Grid.Row="5" Content="L" Background="LightYellow" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="SemicolonButton" Grid.Column="11" Grid.Row="5" Content=";" Background="LightGreen" FontSize="32" Focusable="False"/>
+        <Button Name="ApostropheButton" Grid.Column="12" Grid.Row="5" Content="'" Background="LightGreen" FontSize="32" Focusable="False"/>
+        <Button Name="EnterButton" Grid.Column="13" Grid.Row="5" Grid.ColumnSpan="2" Grid.RowSpan="2" Content="Enter" Background="LightGray" FontSize="20" Focusable="False"/>
+
+        <Button Name="ShiftButton" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Content="Shift" Background="LightGray" FontSize="20" Focusable="False"/>
+        <Button Name="ZButton" Grid.Column="2" Grid.Row="6" Content="Z" Background="IndianRed" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="XButton" Grid.Column="3" Grid.Row="6" Content="X" Background="LightYellow" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="CButton" Grid.Column="4" Grid.Row="6" Content="C" Background="LightGreen" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="VButton" Grid.Column="5" Grid.Row="6" Content="V" Background="CornflowerBlue" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="BButton" Grid.Column="6" Grid.Row="6" Content="B" Background="CornflowerBlue" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="NButton" Grid.Column="7" Grid.Row="6" Content="N" Background="LightPink" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="MButton" Grid.Column="8" Grid.Row="6" Content="M" Background="LightPink" FontSize="32" Click="Button_Click" Focusable="False"/>
+        <Button Name="CommaButton" Grid.Column="9" Grid.Row="6" Content="," Background="IndianRed" FontSize="32" Focusable="False"/>
+        <Button Name="PeriodButton" Grid.Column="10" Grid.Row="6" Content="." Background="LightYellow" FontSize="32" Focusable="False"/>
+        <Button Name="SlashButton" Grid.Column="11" Grid.Row="6" Content="/" Background="LightGreen" FontSize="32" Focusable="False"/>
+        <Button Grid.Column="12" Grid.Row="6" Background="LightGray" Focusable="False"/>
+        <Button Name="SpaceButton" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="9" Content="Space"
+                Background="LightGray" FontSize="20" Click="SpaceButton_Click" Focusable="False"/>
+        <Button Name="ControlButton" Grid.Column="0" Grid.Row="7" Content="Ctrl" Background="LightGray" FontSize="20" Focusable="False"/>
+        <Button Grid.Column="1" Grid.Row="7" Content="Win" Background="LightGray" FontSize="20" Focusable="False"/>
+        <Button Grid.Column="2" Grid.Row="7" Content="Alt" Background="LightGray" FontSize="20" Focusable="False"/>
+        <Button Grid.Column="12" Grid.Row="7" Grid.ColumnSpan="3" Background="LightGray" Focusable="False"/>
+    </Grid>
+</Window>
