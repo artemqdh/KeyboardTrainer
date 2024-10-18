@@ -6,7 +6,7 @@ namespace KeyboardTrainer
 {
 	public partial class MainWindow : Window
 	{
-		private List<string> _sentences = new List<string>()
+		private List<string> _sentences = new List<string>() ///< List of the given sentences
 		{
 			"Max Joykner sneakily drove his car around every corner looking for his dog.",
 			"The two boys collected twigs outside, for over an hour, in the freezing cold.",
@@ -18,25 +18,28 @@ namespace KeyboardTrainer
 		private int _sentenceIndex = 0;
 		private int _fails = 0;
 		private string _typedText = "";
-		private DateTime _startTime;
+		
 		private int _charPerMinute = 0;
 		private int _typedChars = 0;
+		private DateTime _startTime;
 		private DateTime _lastKeyPressTime;
+        private TimeSpan _elapsedTime;
 
-		public MainWindow()
+        public MainWindow()
 		{
 			InitializeComponent();
 		}
 
 		private void Start_Click(object sender, RoutedEventArgs e)
 		{
-			_sentenceIndex = 0;
-			_fails = 0;
-			_typedText = "";
-			
-			_startTime = DateTime.Now;
+            _sentenceIndex = 0;
+            _fails = 0;
+            _typedText = "";
+            _typedChars = 0;
+            _elapsedTime = TimeSpan.Zero;
+            _startTime = DateTime.Now;
 
-			ShowSentence(0); ///< Show the first sentence
+            ShowSentence(0); ///< Show the first sentence
 			UpdateFails();
 			UpdateSpeed();
 		}
@@ -64,15 +67,14 @@ namespace KeyboardTrainer
 
 		private double CalculateSpeed()
 		{
-			TimeSpan elaspedTime = DateTime.Now - _startTime;
-			double secondsElapsed = elaspedTime.TotalSeconds;
+            TimeSpan elapsedTime = DateTime.Now - _startTime;
 
-			if (secondsElapsed == 0)
+			if (elapsedTime.TotalSeconds == 0)
 			{
-				return 0;
+				return _charPerMinute;
 			}
 
-			_charPerMinute = (int)((_typedText.Length / secondsElapsed) * 60);
+            _charPerMinute = (int)((_typedChars / elapsedTime.TotalMinutes));
 
             return _charPerMinute;
 		}
@@ -207,10 +209,17 @@ namespace KeyboardTrainer
 			}
 			else if (_typedText.Length > 0) ///< Check for fail
 			{
-				if (_typedText[_typedText.Length - 1] != _sentences[_sentenceIndex][_typedText.Length - 1])
+				try
 				{
-					_fails++;
-					UpdateFails();
+					if (_typedText[_typedText.Length - 1] != _sentences[_sentenceIndex][_typedText.Length - 1])
+					{
+						_fails++;
+						UpdateFails();
+					}
+				}
+				catch (IndexOutOfRangeException ex)
+				{
+					MessageBox.Show($"Error: {ex}");
 				}
 			}
 		}
